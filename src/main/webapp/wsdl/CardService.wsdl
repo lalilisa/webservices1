@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service" xmlns:intf="http://service" xmlns:tns1="http://domain" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://domain"/>
+   <element name="addCard">
+    <complexType>
+     <sequence>
+      <element name="card" type="tns1:Card"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCardResponse">
+    <complexType>
+     <sequence>
+      <element name="addCardReturn" type="tns1:Card"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByIdCard">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByIdCardResponse">
+    <complexType>
+     <sequence>
+      <element name="getByIdCardReturn" type="tns1:Card"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://domain" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Card">
+    <sequence>
+     <element name="cardNumber" nillable="true" type="xsd:string"/>
+     <element name="cvcNumber" nillable="true" type="xsd:string"/>
+     <element name="expriedDate" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+     <element name="ownerName" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getByIdCardResponse">
+
+      <wsdl:part element="impl:getByIdCardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCardRequest">
+
+      <wsdl:part element="impl:addCard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getByIdCardRequest">
+
+      <wsdl:part element="impl:getByIdCard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCardResponse">
+
+      <wsdl:part element="impl:addCardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CardService">
+
+      <wsdl:operation name="addCard">
+
+         <wsdl:input message="impl:addCardRequest" name="addCardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCardResponse" name="addCardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByIdCard">
+
+         <wsdl:input message="impl:getByIdCardRequest" name="getByIdCardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getByIdCardResponse" name="getByIdCardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CardServiceSoapBinding" type="impl:CardService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addCard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByIdCard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getByIdCardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getByIdCardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CardServiceService">
+
+      <wsdl:port binding="impl:CardServiceSoapBinding" name="CardService">
+
+         <wsdlsoap:address location="http://localhost:8080/WebService/services/CardService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

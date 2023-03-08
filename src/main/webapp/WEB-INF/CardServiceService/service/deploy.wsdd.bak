@@ -1,0 +1,40 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CardServiceService WSDL service -->
+
+  <service name="CardService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service"/>
+      <parameter name="wsdlServiceElement" value="CardServiceService"/>
+      <parameter name="schemaQualified" value="http://service,http://domain"/>
+      <parameter name="wsdlServicePort" value="CardService"/>
+      <parameter name="className" value="service.CardServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="CardService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addCard" qname="operNS:addCard" xmlns:operNS="http://service" returnQName="retNS:addCardReturn" xmlns:retNS="http://service" returnType="rtns:Card" xmlns:rtns="http://domain" soapAction="" >
+        <parameter qname="pns:card" xmlns:pns="http://service" type="tns:Card" xmlns:tns="http://domain"/>
+      </operation>
+      <operation name="getByIdCard" qname="operNS:getByIdCard" xmlns:operNS="http://service" returnQName="retNS:getByIdCardReturn" xmlns:retNS="http://service" returnType="rtns:Card" xmlns:rtns="http://domain" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="addCard getByIdCard"/>
+
+      <typeMapping
+        xmlns:ns="http://domain"
+        qname="ns:Card"
+        type="java:domain.Card"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
